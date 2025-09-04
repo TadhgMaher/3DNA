@@ -52,56 +52,39 @@ export const projects: Project[] = [
     ],
     year: '2024',
     location: 'Green Valley'
-  },
-  {
-    id: '5',
-    title: 'Innovation Hub',
-    category: 'Commercial',
-    description: 'A tech campus designed to foster collaboration and innovation with flexible workspace solutions.',
-    images: [
-      'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/2467558/pexels-photo-2467558.jpeg?auto=compress&cs=tinysrgb&w=800'
-    ],
-    year: '2024',
-    location: 'Tech Park'
-  },
-  {
-    id: '6',
-    title: 'Historic Renovation',
-    category: 'Restoration',
-    description: 'Careful restoration of a 19th-century building while adding modern amenities and accessibility features.',
-    images: [
-      'https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/2034842/pexels-photo-2034842.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/1109541/pexels-photo-1109541.jpeg?auto=compress&cs=tinysrgb&w=800'
-    ],
-    year: '2023',
-    location: 'Historic District'
   }
 ];
 
 export const testimonials: Testimonial[] = [
   {
     id: '1',
-    name: 'Sarah Johnson',
-    company: 'Urban Development Corp',
-    text: 'Working with 3DNA was an exceptional experience. Their attention to detail and innovative approach transformed our vision into reality.',
-    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150'
+    name: 'Joseph',
+    location: 'Co. Kilkenny',
+    text: 'Dylan has produced an outstanding model of our home based on the planning application drawings. The model is of great quality and detail. The model captured some of the main design aspects of the project.'
   },
   {
     id: '2',
-    name: 'Michael Chen',
-    company: 'Green Living Solutions',
-    text: 'The sustainable design solutions provided by 3DNA exceeded our expectations. Truly forward-thinking architecture.',
-    image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150'
+    name: 'Niamh',
+    location: 'Co. Waterford',
+    text: 'Best thing we got in the house was this amazing 3D Model of our home. Super work Dylan, has the pride of place in our living room. My model is one of my praised possessions. One of the nicest personalized items we own. We love showing it off pride of place on display in our new home.'
   },
   {
     id: '3',
-    name: 'Emily Rodriguez',
-    company: 'Cultural Foundation',
-    text: 'Our arts center has become a landmark in the community. 3DNA perfectly balanced functionality with artistic vision.',
-    image: 'https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=150'
+    name: 'Bríd',
+    location: 'Co. Cork',
+    text: 'The quality of the product and attention to detail is exceptional. Dylan was extremely responsive and was very helpful making some changes not on the original drawing in to the design.'
+  },
+  {
+    id: '4',
+    name: 'Seán',
+    location: 'Co. Dublin',
+    text: 'We commissioned Dylan to create a 3D model of our extension plans and we were blown away by the result. The level of detail and accuracy helped us visualize exactly how our new space would look. Absolutely brilliant work.'
+  },
+  {
+    id: '5',
+    name: 'Emma',
+    location: 'Co. Galway',
+    text: 'Dylan created a stunning architectural model of our dream home design. The craftsmanship is incredible and it really brings the plans to life. We show it to everyone who visits - it is a true conversation piece and work of art.'
   }
 ];
 

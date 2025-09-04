@@ -11,9 +11,8 @@ export interface Project {
 export interface Testimonial {
   id: string;
   name: string;
-  company: string;
+  location: string;
   text: string;
-  image: string;
 }
 
 export interface Award {
@@ -24,7 +23,6 @@ export interface Award {
 }
 
 export interface ContactFormData {
-  type: 'Partner' | 'Customer' | '';
   name: string;
   email: string;
   phone: string;

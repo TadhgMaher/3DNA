@@ -1,65 +1,116 @@
-import React from 'react';
-import { Star, Award } from 'lucide-react';
-import { testimonials, awards } from '../data/portfolioData';
+import React, { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { testimonials } from "../data/portfolioData";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const Testimonials: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [titleRef, titleVisible] = useScrollAnimation(0.3);
+  const [testimonialsRef, testimonialsVisible] = useScrollAnimation(0.1);
+
+  const testimonialsPerView = 3;
+  const maxIndex = testimonials.length - testimonialsPerView;
+
+  const nextTestimonials = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const prevTestimonials = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
   return (
-    <section id="testimonials" className="py-24 bg-white">
+    <section id="testimonials" className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">Client Testimonials</h2>
+        <div
+          ref={titleRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            titleVisible ? "animate-slide-up" : "animate-hidden"
+          }`}
+        >
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            Client Testimonials
+          </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Hear what our clients say about their experience working with 3DNA.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-20">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="text-gray-700 leading-relaxed mb-6 italic text-lg">
-                "{testimonial.text}"
-              </p>
-              <div className="flex items-center">
-                <img 
-                  src={testimonial.image} 
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover mr-4"
-                />
-                <div>
-                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                  <p className="text-gray-600 text-sm">{testimonial.company}</p>
+        <div className="relative max-w-7xl mx-auto">
+          {/* Testimonials Container */}
+          <div
+            ref={testimonialsRef}
+            className={`overflow-hidden transition-all duration-1000 ${
+              testimonialsVisible ? "animate-fade-scale" : "animate-hidden"
+            }`}
+          >
+            <div
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{
+                transform: `translateX(-${currentIndex * 20}%)`,
+                width: `${(testimonials.length * 100) / testimonialsPerView}%`,
+              }}
+            >
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="flex-shrink-0 px-4"
+                  style={{ width: `${100 / testimonials.length}%` }}
+                >
+                  <div className="bg-gray-50 p-8 hover:shadow-xl hover:shadow-gray-100 transition-all duration-500 transform hover:-translate-y-2 h-full">
+                    <p className="text-gray-700 leading-relaxed mb-6 italic text-lg">
+                      "{testimonial.text}"
+                    </p>
+                    <div className="border-t pt-4">
+                      <h4 className="font-semibold text-gray-900 text-lg">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-gray-700 font-medium">
+                        {testimonial.location}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        <div className="bg-blue-900 rounded-3xl p-12 text-white">
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-4">
-              <Award className="w-12 h-12 text-yellow-400" />
-            </div>
-            <h3 className="text-4xl font-bold mb-4">Awards & Recognition</h3>
-            <p className="text-blue-100 text-lg">
-              Our commitment to excellence has been recognized by industry leaders
-            </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {awards.map((award) => (
-              <div key={award.id} className="text-center">
-                <div className="bg-white/10 rounded-xl p-6 hover:bg-white/20 transition-colors duration-300">
-                  <h4 className="font-bold text-lg mb-2">{award.title}</h4>
-                  <p className="text-blue-200 text-sm mb-1">{award.organization}</p>
-                  <p className="text-yellow-400 font-semibold">{award.year}</p>
-                </div>
+
+          {/* Navigation */}
+          <div className="flex justify-center items-center space-x-8 mt-16">
+            <button
+              onClick={prevTestimonials}
+              className="group relative overflow-hidden px-6 py-3 bg-gray-600 text-white transition-all duration-300 hover:bg-gray-700 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              <div className="flex items-center space-x-2">
+                <ChevronLeft className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" />
+                <span className="font-medium">Previous</span>
               </div>
-            ))}
+            </button>
+
+            {/* Elegant Indicators */}
+            <div className="flex items-center space-x-4 px-8">
+              {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`h-2 transition-all duration-300 rounded-full ${
+                    index === currentIndex
+                      ? "w-8 bg-gray-700"
+                      : "w-2 bg-gray-300 hover:bg-gray-400"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={nextTestimonials}
+              className="group relative overflow-hidden px-6 py-3 bg-gray-600 text-white transition-all duration-300 hover:bg-gray-700 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              <div className="flex items-center space-x-2">
+                <span className="font-medium">Next</span>
+                <ChevronRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </button>
           </div>
         </div>
       </div>
